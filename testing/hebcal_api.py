@@ -27,7 +27,14 @@ import requests, json
 def greg_to_heb(year, month, day):
     '''
     Utilizes HebCal's API to convert gregorian dates to hebrew dates
+    
+    >>>print(heb_to_greg(5752, 'Av', 26))
+    Sample JSON Response:
+    {'gy': 1996, 'gm': 8, 'gd': 11,
+     'hy': 5752, 'hm': 'Av','hd': 26,
+     'hebrew': 'כ״ו בְּאָב תשנ״ו', 'events': ['Parashat Shoftim']}    
     '''
+    
     url = f"https://www.hebcal.com/converter/?cfg=json&gy={year}&gm={month}&gd={day}&g2h=1"
     r = requests.get(url)
     print("Status code:", r.status_code)
@@ -43,9 +50,15 @@ def greg_to_heb(year, month, day):
 def heb_to_greg(year, month, day):
     '''
     Utilizes HebCal's API to convert hebrew dates to gregorian dates
-    '''
-    #Calculates the hebrew date's english equivalent for the next 5 years
     
+    >>>print(greg_to_heb(1993, 7, 14))
+    Sample JSON response:
+    {'gy': 1993, 'gm': 7, 'gd': 14,
+    'hy': 5753, 'hm': 'Tamuz', 'hd': 25,
+    'hebrew': 'כ״ה בְּתַמּוּז תשנ״ג', 'events': ['Parashat Matot-Masei']}
+    '''
+    
+    #Calculates the hebrew date's english equivalent for the next 5 years
     for year_increment in range(year, year + 5):
         url = f"https://www.hebcal.com/converter/?cfg=json&hy={year_increment}&hm={month}&hd={day}&h2g=1"
         r = requests.get(url)
