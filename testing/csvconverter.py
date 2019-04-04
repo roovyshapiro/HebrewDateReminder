@@ -18,13 +18,13 @@ dtstamp = current_time.strftime("%Y%m%d") + "T" + current_time.strftime("%H%M%S"
 #ics header - this will only be printed once.
 cal_intro = ["BEGIN:VCALENDAR",
              "VERSION:2.0",
-             "PRODID:-//RoovyShapiro/NONSGML HebrewEvent//EN",
+             "PRODID:-//RoovyShapiro/NONSGML HebrewDateReminder//EN",
              "CALSCALE:GREGORIAN",
              "METHOD:PUBLISH",
              "X-LOTUS-CHARSET:UTF-8",
              "X-PUBLISHED-TTL:PT7D",
-             "X-WR-CALNAME:Hebrew Event Calendar",
-             "X-WR-CALDESC:Hebrew Event Calendar by Roovy Shapiro"]
+             "X-WR-CALNAME:Hebrew Date Calendar",
+             "X-WR-CALDESC:Hebrew Date Calendar by Roovy Shapiro"]
 
 #the values of vevent_dict are rewritten for each event
 vevent_dict = OrderedDict()
@@ -55,7 +55,7 @@ valarm_dict = {'BEGIN':'VALARM',
                }
 
 #Write the calendar header
-with open('HebrewEventCalendar.ics', 'a') as f:
+with open('HebrewDateCalendar.ics', 'a') as f:
     for line in cal_intro:
         f.write(line)
         f.write('\n')
@@ -93,7 +93,7 @@ with open('dates.csv', encoding='utf-8-sig') as csv_file:
         valarm_dict['TRIGGER'] = "-P6DT4H0M0S"
 
         #Once the values have been overwritten, they are appended to the ics file.
-        with open('HebrewEventCalendar.ics', 'a') as f:
+        with open('HebrewDateCalendar.ics', 'a') as f:
             for k in vevent_dict.keys():
                 f.write("{}:{}".format(k, vevent_dict[k]))
                 f.write('\n')
@@ -107,5 +107,5 @@ with open('dates.csv', encoding='utf-8-sig') as csv_file:
             f.write('END:VEVENT\n')
 
 #closing tag of the ics is appended to the end of the file              
-with open('HebrewEventCalendar.ics', 'a') as f:
+with open('HebrewDateCalendar.ics', 'a') as f:
     f.write('END:VCALENDAR')
