@@ -22,7 +22,7 @@
 ##Hebcal instituted a rate limit of 90 requests per 10 seconds
 
 import csv, json, requests, time
-from datetime import datetime
+import datetime
 from collections import OrderedDict 
 
 def greg_to_heb(year, month, day):
@@ -85,7 +85,7 @@ def heb_greg_csv(csv_file):
     '''
     #Get the current secular date and then convert it to it's hebrew equivalent.
     #today = ['2019', '04', '09']
-    today = (datetime.today().strftime('%Y,%m,%d'))
+    today = (datetime.datetime.today().strftime('%Y,%m,%d'))
     today = today.split(',')
     current_heb_year, current_heb_month, current_heb_day = greg_to_heb(today[0],today[1],today[2])
     
@@ -131,7 +131,7 @@ def generate_ics():
     one email reminder the day before.
     '''
     users_email = "roovyshapiro@gmail.com"
-    current_time = datetime.now()
+    current_time = datetime.datetime.now()
     #converts current time into a usable format for DTSTAMP eg, 20190325T210030Z
     dtstamp = current_time.strftime("%Y%m%d") + "T" + current_time.strftime("%H%M%S") + "Z"
 
@@ -194,18 +194,20 @@ def generate_ics():
         for row in csv_reader:
             row_num += 1
             #Dates can't be single digits without a preceeding '0'
-            #TODO - what if a day is the 31st? The next will be the 32nd.
-            #Need to use datetime to correctly increase day by 1.
             if len(row['Month']) == 1:
                 row['Month'] = str(0) + str(row['Month'])
             if len(row['Day']) == 1:
                 row['Day'] = str(0) + str(row['Day'])
-                next_day = str(0) + str(int(row['Day']) + 1)
-            elif len(row['Day']) == 2:
-                next_day = str(int(row['Day']) + 1)
+
+            #If the day after is the last of the month or the last of the year,
+            #it will be calculated correctly.
+            tomorrow = datetime.date(int(row['Year']),int(row['Month']),int(row['Day'])) + datetime.timedelta(days=1)
+            next_day = tomorrow.strftime('%d')
+            next_month = tomorrow.strftime('%m')
+            next_year = tomorrow.strftime('%Y')
                                    
             vevent_dict['DTSTART;VALUE=DATE'] = "{}{}{}".format(row['Year'], row['Month'], row['Day'])
-            vevent_dict['DTEND;VALUE=DATE'] = "{}{}{}".format(row['Year'], row['Month'],next_day)
+            vevent_dict['DTEND;VALUE=DATE'] = "{}{}{}".format(next_year, next_month, next_day)
 
             vevent_dict['DTSTAMP'] = dtstamp
             vevent_dict['UID'] = str(row_num) + f"-{users_email}"
