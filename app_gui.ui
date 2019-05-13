@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>570</width>
+    <height>517</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Hebrew Date Reminder</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QListWidget" name="months_list">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>180</y>
+      <width>111</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Nisan</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Iyyar</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Sivan</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Tamuz</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Av</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Elul</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Tishrei</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Cheshvan</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Kislev</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Tevet</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Shvat</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Adar1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Adar2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+   </widget>
+   <widget class="QListWidget" name="occasion_list">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>190</y>
+      <width>111</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Birthday</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Passing</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Anniversary</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QTableWidget" name="table_widget">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>307</y>
+      <width>601</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <row>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </row>
+    <column>
+     <property name="text">
+      <string>First Name</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Last Name</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Month</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Day</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Year</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Occasion</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QPushButton" name="clear_table">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>444</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Clear Table</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="day_spin_box">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>190</y>
+      <width>33</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>1</number>
+    </property>
+    <property name="maximum">
+     <number>30</number>
+    </property>
+    <property name="value">
+     <number>1</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="next_row">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>230</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Next Row</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="header_label">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>9</y>
+      <width>317</width>
+      <height>33</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Hebrew Date Reminder</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="year_spin_box">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>240</y>
+      <width>45</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>5500</number>
+    </property>
+    <property name="maximum">
+     <number>6000</number>
+    </property>
+    <property name="value">
+     <number>5779</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>220</y>
+      <width>36</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Year:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>160</y>
+      <width>30</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Day:</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="first_name">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>110</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="last_name">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>110</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>First Name:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>80</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Last Name:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>160</y>
+      <width>46</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Month:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>160</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Occasion:</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>570</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
