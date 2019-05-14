@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>570</width>
-    <height>517</height>
+    <width>833</width>
+    <height>607</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QListWidget" name="months_list">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>180</y>
-      <width>111</width>
-      <height>101</height>
+      <x>9</x>
+      <y>275</y>
+      <width>250</width>
+      <height>124</height>
      </rect>
     </property>
     <item>
@@ -97,10 +97,10 @@
    <widget class="QListWidget" name="occasion_list">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>190</y>
-      <width>111</width>
-      <height>71</height>
+      <x>580</x>
+      <y>70</y>
+      <width>244</width>
+      <height>123</height>
      </rect>
     </property>
     <item>
@@ -123,9 +123,9 @@
     <property name="geometry">
      <rect>
       <x>9</x>
-      <y>307</y>
-      <width>601</width>
-      <height>131</height>
+      <y>405</y>
+      <width>815</width>
+      <height>123</height>
      </rect>
     </property>
     <row>
@@ -163,12 +163,17 @@
       <string>Occasion</string>
      </property>
     </column>
+    <column>
+     <property name="text">
+      <string>Calendar</string>
+     </property>
+    </column>
    </widget>
    <widget class="QPushButton" name="clear_table">
     <property name="geometry">
      <rect>
       <x>9</x>
-      <y>444</y>
+      <y>534</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -180,8 +185,8 @@
    <widget class="QSpinBox" name="day_spin_box">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>190</y>
+      <x>265</x>
+      <y>275</y>
       <width>33</width>
       <height>20</height>
      </rect>
@@ -199,8 +204,8 @@
    <widget class="QPushButton" name="next_row">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>230</y>
+      <x>705</x>
+      <y>376</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -232,8 +237,8 @@
    <widget class="QSpinBox" name="year_spin_box">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>240</y>
+      <x>265</x>
+      <y>377</y>
       <width>45</width>
       <height>20</height>
      </rect>
@@ -251,8 +256,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>220</y>
+      <x>265</x>
+      <y>301</y>
       <width>36</width>
       <height>16</height>
      </rect>
@@ -271,8 +276,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>160</y>
+      <x>265</x>
+      <y>222</y>
       <width>30</width>
       <height>16</height>
      </rect>
@@ -291,30 +296,30 @@
    <widget class="QPlainTextEdit" name="first_name">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>110</y>
-      <width>181</width>
-      <height>31</height>
+      <x>9</x>
+      <y>70</y>
+      <width>310</width>
+      <height>123</height>
      </rect>
     </property>
    </widget>
    <widget class="QPlainTextEdit" name="last_name">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>110</y>
-      <width>181</width>
-      <height>31</height>
+      <x>325</x>
+      <y>70</y>
+      <width>249</width>
+      <height>123</height>
      </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>80</y>
-      <width>71</width>
-      <height>21</height>
+      <x>9</x>
+      <y>48</y>
+      <width>72</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="font">
@@ -331,10 +336,10 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>80</y>
-      <width>71</width>
-      <height>21</height>
+      <x>325</x>
+      <y>48</y>
+      <width>72</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="font">
@@ -351,10 +356,10 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>160</y>
+      <x>9</x>
+      <y>222</y>
       <width>46</width>
-      <height>13</height>
+      <height>16</height>
      </rect>
     </property>
     <property name="font">
@@ -371,9 +376,9 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>160</y>
-      <width>71</width>
+      <x>580</x>
+      <y>48</y>
+      <width>62</width>
       <height>16</height>
      </rect>
     </property>
@@ -388,13 +393,65 @@
      <string>Occasion:</string>
     </property>
    </widget>
+   <widget class="QCalendarWidget" name="secular_calendar">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>240</y>
+      <width>280</width>
+      <height>155</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>311</x>
+      <y>208</y>
+      <width>21</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="hebrew_date_btn">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>199</y>
+      <width>86</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Hebrew Date</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="secular_date_btn">
+    <property name="geometry">
+     <rect>
+      <x>325</x>
+      <y>199</y>
+      <width>84</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Secular Date</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>570</width>
+     <width>833</width>
      <height>21</height>
     </rect>
    </property>
