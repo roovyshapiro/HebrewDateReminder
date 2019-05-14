@@ -30,6 +30,8 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.secular_calendar.selectionChanged.connect(self.secular_date_select)
         self.next_row.clicked.connect(self.row_change)
         self.clear_table.clicked.connect(self.delete_table)
+        self.clear_row_btn.clicked.connect(self.clear_row)
+        self.table_widget.cellClicked.connect(self.row_select)
 
         ###This section sets certain variables that need to be applied before any
         ###widget is activated.
@@ -160,8 +162,20 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         #currently selected item.
         current_occasion = self.occasion_list.currentItem()     
         self.table_widget.setItem(self.row, 5, QtGui.QTableWidgetItem(current_occasion.text()))
-        
-              
+        if self.hebrew_date_btn.isChecked():
+            print('checked')
+            self.table_widget.setItem(self.row, 6, QtGui.QTableWidgetItem('hebrew'))
+        elif self.secular_date_btn.isChecked():
+            print('secularcheck')
+            self.table_widget.setItem(self.row, 6, QtGui.QTableWidgetItem('secular'))
+
+    def row_select(self):
+        '''
+        When clicking on a cell on the table, it changes the current row to the currently
+        selected cell's row.
+        '''
+        self.row = self.table_widget.currentRow()
+
     def delete_table(self):
         '''
         Clears the contents of the entire table.
@@ -169,6 +183,15 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.table_widget.clearContents()
         self.table_widget.setCurrentCell(0,0)
 
+    def clear_row(self):
+        '''
+        Clears the currently selected row.
+        '''
+        for x in range(7):
+            self.table_widget.setItem(self.row, x, QtGui.QTableWidgetItem(''))
+        self.table_widget.setCurrentCell(self.row,0)
+        self.first_name.clear()
+        self.last_name.clear()
           
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)

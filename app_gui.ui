@@ -124,8 +124,8 @@
      <rect>
       <x>9</x>
       <y>405</y>
-      <width>815</width>
-      <height>123</height>
+      <width>751</width>
+      <height>121</height>
      </rect>
     </property>
     <row>
@@ -204,8 +204,8 @@
    <widget class="QPushButton" name="next_row">
     <property name="geometry">
      <rect>
-      <x>705</x>
-      <y>376</y>
+      <x>630</x>
+      <y>330</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -443,6 +443,19 @@
     </property>
     <property name="text">
      <string>Secular Date</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="clear_row_btn">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>370</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Clear Row</string>
     </property>
    </widget>
   </widget>
