@@ -16,6 +16,15 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         Ui_MainWindow.__init__(self)
         self.setupUi(self)
 
+        ###This section sets certain variables that need to be applied before any
+        ###widget is activated.
+        #Start the table at 0,0 instead of the default of -1,-1
+        self.table_widget.setCurrentCell(0,0)
+        #Whichever current row is selected
+        self.row = self.table_widget.currentRow()
+        self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem('hebrew'))
+    
+
         ###This section connects events from all the widgets to their
         ###respective functions.
         self.first_name.textChanged.connect(self.first_name_entry)
@@ -26,20 +35,18 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.hebrew_date_btn.toggled.connect(self.radio_button_toggle)
         self.months_list.itemClicked.connect(self.months_select)
         self.day_spin_box.valueChanged.connect(self.day_spin_value)
-        self.year_spin_box.valueChanged.connect(self.year_spin_value)
+
+        self.sec_year_radio.toggled.connect(self.sec_year_radio_toggle)
+        self.sec_year_spin_box.valueChanged.connect(self.sec_year_spin_value)
+        self.heb_year_spin_box.valueChanged.connect(self.heb_year_spin_value)
+        
         self.secular_calendar.selectionChanged.connect(self.secular_date_select)
         self.next_row.clicked.connect(self.row_change)
         self.clear_table.clicked.connect(self.delete_table)
         self.clear_row_btn.clicked.connect(self.clear_row)
         self.table_widget.cellClicked.connect(self.row_select)
 
-        ###This section sets certain variables that need to be applied before any
-        ###widget is activated.
-        #Start the table at 0,0 instead of the default of -1,-1
-        self.table_widget.setCurrentCell(0,0)
-        #Whichever current row is selected
-        self.row = self.table_widget.currentRow()
-        self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem('hebrew'))
+
         
     def first_name_entry(self):
         '''
@@ -111,14 +118,23 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         day = str(self.day_spin_box.value())
         self.table_widget.setItem(self.row, 3, QtWidgets.QTableWidgetItem(day))
 
-    def year_spin_value(self):
+    def sec_year_radio_toggle(self):
+        self.table_widget.setItem(self.row, 3, QtWidgets.QTableWidgetItem(''))
+
+    def heb_year_spin_value(self):
         '''
-        Gets the year from the year_spin_box QSpinBox and enters it into the table.
+        Gets the year from the heb_year_spin_box QSpinBox and enters it into the table.
         Only works if the Hebrew Date QRadioButton is selected.
         '''
-        if self.secular_date_btn.isChecked():
+        if self.secular_date_btn.isChecked() or self.sec_year_radio.isChecked():
             return
-        year = str(self.year_spin_box.value())
+        year = str(self.heb_year_spin_box.value())
+        self.table_widget.setItem(self.row, 4, QtWidgets.QTableWidgetItem(year))
+
+    def sec_year_spin_value(self):
+        if self.secular_date_btn.isChecked() or self.heb_year_radio.isChecked():
+            return
+        year = str(self.sec_year_spin_box.value())
         self.table_widget.setItem(self.row, 4, QtWidgets.QTableWidgetItem(year))
 
     def secular_date_select(self):
@@ -153,7 +169,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         #Resets values back to default.
         #These fill in the next row if possible since it counts as a value change.
         self.day_spin_box.setValue(1)
-        self.year_spin_box.setValue(5779)
+        self.heb_year_spin_box.setValue(5779)
         self.first_name.setPlainText('')
         self.last_name.setPlainText('')
         #Going to the next row fills out the Occassion field with whatever is still currently
