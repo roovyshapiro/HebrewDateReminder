@@ -2,7 +2,7 @@
 #https://www.pythonforengineers.com/your-first-gui-app-with-python-and-pyqt/
 
 import sys
-from PyQt4 import QtCore, QtGui, uic
+from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 #This .ui file is created by QTDesigner and then imported here.
 #Add new widgets via QTDesigner, save the ui file and then simply reference them here.
@@ -10,9 +10,9 @@ qtCreatorFile = "app_gui.ui"
  
 Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
  
-class MyApp(QtGui.QMainWindow, Ui_MainWindow):
+class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
-        QtGui.QMainWindow.__init__(self)
+        QtWidgets.QMainWindow.__init__(self)
         Ui_MainWindow.__init__(self)
         self.setupUi(self)
 
@@ -39,7 +39,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.table_widget.setCurrentCell(0,0)
         #Whichever current row is selected
         self.row = self.table_widget.currentRow()
-        self.table_widget.setItem(self.row, 6, QtGui.QTableWidgetItem('hebrew'))
+        self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem('hebrew'))
         
     def first_name_entry(self):
         '''
@@ -47,7 +47,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         Enters it into column index 0 in the table widget.
         '''
         first_name = self.first_name.toPlainText()
-        self.table_widget.setItem(self.row, 0, QtGui.QTableWidgetItem(first_name))
+        self.table_widget.setItem(self.row, 0, QtWidgets.QTableWidgetItem(first_name))
 
     def last_name_entry(self):
         '''
@@ -55,7 +55,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         Enters it into column index 1 in the table widget.
         '''
         last_name = self.last_name.toPlainText()
-        self.table_widget.setItem(self.row, 1, QtGui.QTableWidgetItem(last_name))
+        self.table_widget.setItem(self.row, 1, QtWidgets.QTableWidgetItem(last_name))
 
     def occasion_select(self, item):
         '''
@@ -63,7 +63,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         Enters it into column index 1 in the table widget.
         '''        
         occasion = (item.text())
-        self.table_widget.setItem(self.row, 5, QtGui.QTableWidgetItem(occasion))
+        self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem(occasion))
         
     def radio_button_toggle(self):
         '''
@@ -74,13 +74,13 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         dates.
         '''
         if self.hebrew_date_btn.isChecked() or self.secular_date_btn.isChecked():
-            self.table_widget.setItem(self.row, 2, QtGui.QTableWidgetItem(''))
-            self.table_widget.setItem(self.row, 3, QtGui.QTableWidgetItem(''))
-            self.table_widget.setItem(self.row, 4, QtGui.QTableWidgetItem(''))
+            self.table_widget.setItem(self.row, 2, QtWidgets.QTableWidgetItem(''))
+            self.table_widget.setItem(self.row, 3, QtWidgets.QTableWidgetItem(''))
+            self.table_widget.setItem(self.row, 4, QtWidgets.QTableWidgetItem(''))
         if self.hebrew_date_btn.isChecked():
-            self.table_widget.setItem(self.row, 6, QtGui.QTableWidgetItem('hebrew'))
+            self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem('hebrew'))
         elif self.secular_date_btn.isChecked():
-            self.table_widget.setItem(self.row, 6, QtGui.QTableWidgetItem('secular'))
+            self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem('secular'))
 
     def months_select(self, item):
         '''
@@ -91,15 +91,15 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         if self.secular_date_btn.isChecked():
             return
         month = (item.text())
-        self.table_widget.setItem(self.row, 2, QtGui.QTableWidgetItem(month))
+        self.table_widget.setItem(self.row, 2, QtWidgets.QTableWidgetItem(month))
         #Since the spin box for day only goes into effect when the day is changed
         #from the default value of 1, we automatically set the first row day to 1.
         #This will prevent the problem where the first date takes place on the 1st,
         #and it won't be added automatically. We don't have to worry about it for
         #the subsequent rows because row_change auto sets the spin_box back to 1,
         #and that counts as a change.
-        self.table_widget.setItem(self.row, 3, QtGui.QTableWidgetItem(str(1)))
-        self.table_widget.setItem(self.row, 4, QtGui.QTableWidgetItem(str(5779)))
+        self.table_widget.setItem(self.row, 3, QtWidgets.QTableWidgetItem(str(1)))
+        self.table_widget.setItem(self.row, 4, QtWidgets.QTableWidgetItem(str(5779)))
 
     def day_spin_value(self):
         '''
@@ -109,7 +109,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         if self.secular_date_btn.isChecked():
             return
         day = str(self.day_spin_box.value())
-        self.table_widget.setItem(self.row, 3, QtGui.QTableWidgetItem(day))
+        self.table_widget.setItem(self.row, 3, QtWidgets.QTableWidgetItem(day))
 
     def year_spin_value(self):
         '''
@@ -119,7 +119,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         if self.secular_date_btn.isChecked():
             return
         year = str(self.year_spin_box.value())
-        self.table_widget.setItem(self.row, 4, QtGui.QTableWidgetItem(year))
+        self.table_widget.setItem(self.row, 4, QtWidgets.QTableWidgetItem(year))
 
     def secular_date_select(self):
         '''
@@ -133,9 +133,9 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         month = str(date.month())
         day = str(date.day())
         year = str(date.year())
-        self.table_widget.setItem(self.row, 2, QtGui.QTableWidgetItem(month)) 
-        self.table_widget.setItem(self.row, 3, QtGui.QTableWidgetItem(day))
-        self.table_widget.setItem(self.row, 4, QtGui.QTableWidgetItem(year))
+        self.table_widget.setItem(self.row, 2, QtWidgets.QTableWidgetItem(month)) 
+        self.table_widget.setItem(self.row, 3, QtWidgets.QTableWidgetItem(day))
+        self.table_widget.setItem(self.row, 4, QtWidgets.QTableWidgetItem(year))
         
 
     def row_change(self):
@@ -161,13 +161,13 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         #This also prevents a user from having to click away and then click back to choose the
         #currently selected item.
         current_occasion = self.occasion_list.currentItem()     
-        self.table_widget.setItem(self.row, 5, QtGui.QTableWidgetItem(current_occasion.text()))
+        self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem(current_occasion.text()))
         if self.hebrew_date_btn.isChecked():
             print('checked')
-            self.table_widget.setItem(self.row, 6, QtGui.QTableWidgetItem('hebrew'))
+            self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem('hebrew'))
         elif self.secular_date_btn.isChecked():
             print('secularcheck')
-            self.table_widget.setItem(self.row, 6, QtGui.QTableWidgetItem('secular'))
+            self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem('secular'))
 
     def row_select(self):
         '''
@@ -188,13 +188,13 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         Clears the currently selected row.
         '''
         for x in range(7):
-            self.table_widget.setItem(self.row, x, QtGui.QTableWidgetItem(''))
+            self.table_widget.setItem(self.row, x, QtWidgets.QTableWidgetItem(''))
         self.table_widget.setCurrentCell(self.row,0)
         self.first_name.clear()
         self.last_name.clear()
           
 if __name__ == "__main__":
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     window = MyApp()
     window.show()
     sys.exit(app.exec_())
