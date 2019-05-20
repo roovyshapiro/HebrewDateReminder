@@ -16,6 +16,10 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         Ui_MainWindow.__init__(self)
         self.setupUi(self)
 
+        #Prints silent errors
+        sys._excepthook = sys.excepthook
+        sys.excepthook = self.exception_hook
+
         ###This section sets certain variables that need to be applied before any
         ###widget is activated.
         #Start the table at 0,0 instead of the default of -1,-1
@@ -23,7 +27,6 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         #Whichever current row is selected
         self.row = self.table_widget.currentRow()
         self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem('hebrew'))
-    
 
         ###This section connects events from all the widgets to their
         ###respective functions.
@@ -37,6 +40,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.day_spin_box.valueChanged.connect(self.day_spin_value)
 
         self.sec_year_radio.toggled.connect(self.sec_year_radio_toggle)
+        self.heb_year_radio.toggled.connect(self.heb_year_radio_toggle)
+
         self.sec_year_spin_box.valueChanged.connect(self.sec_year_spin_value)
         self.heb_year_spin_box.valueChanged.connect(self.heb_year_spin_value)
         
@@ -68,7 +73,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         '''
         Gets the occasion selected from the occasion_list QListWidget item.
         Enters it into column index 1 in the table widget.
-        '''        
+        '''
         occasion = (item.text())
         self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem(occasion))
         
@@ -119,7 +124,22 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.table_widget.setItem(self.row, 3, QtWidgets.QTableWidgetItem(day))
 
     def sec_year_radio_toggle(self):
-        self.table_widget.setItem(self.row, 3, QtWidgets.QTableWidgetItem(''))
+        '''
+        Allows inputting of Secular year.
+        Dissallows inputting of Hebrew Year.
+        Every time this button is toggled, the Year value gets reset.
+        '''
+        self.table_widget.setItem(self.row, 4, QtWidgets.QTableWidgetItem(''))
+        self.heb_year_spin_box.setEnabled(False)
+        self.sec_year_spin_box.setEnabled(True)
+
+    def heb_year_radio_toggle(self):
+        '''
+        Allows inputting of Hebrew Year.
+        Dissallows inputting of Secular Year.
+        '''
+        self.sec_year_spin_box.setEnabled(False)
+        self.heb_year_spin_box.setEnabled(True)
 
     def heb_year_spin_value(self):
         '''
@@ -176,8 +196,15 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         #selected. This makes it convenient to enter rows with the same occassions one after the other.
         #This also prevents a user from having to click away and then click back to choose the
         #currently selected item.
-        current_occasion = self.occasion_list.currentItem()     
+        current_occasion = self.occasion_list.currentItem()
+        #If "Next Row" is selected prior to the occasion is selected,
+        #the Occasion value will be set to blank. Otherwise it's None by default
+        #and none has no .text() function and the program crashes silently.
+        if self.table_widget.itemAt(self.row, 5) == None:
+            self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem(''))
+            return
         self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem(current_occasion.text()))
+
         if self.hebrew_date_btn.isChecked():
             print('checked')
             self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem('hebrew'))
@@ -208,6 +235,15 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.table_widget.setCurrentCell(self.row,0)
         self.first_name.clear()
         self.last_name.clear()
+
+    def exception_hook(self, exctype, value, traceback):
+        '''
+        This function is setup to print silent errors.
+        '''
+        print(exctype, value, traceback)
+        sys._excepthook(exctype, value, traceback) 
+        sys.exit(1) 
+    
           
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

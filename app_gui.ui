@@ -106,6 +106,9 @@
       <height>123</height>
      </rect>
     </property>
+    <property name="sortingEnabled">
+     <bool>false</bool>
+    </property>
     <item>
      <property name="text">
       <string>Birthday</string>
@@ -521,6 +524,9 @@
      </property>
     </widget>
     <widget class="QSpinBox" name="sec_year_spin_box">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>110</x>
