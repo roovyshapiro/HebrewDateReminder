@@ -26,7 +26,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.table_widget.setCurrentCell(0,0)
         #Whichever current row is selected
         self.row = self.table_widget.currentRow()
-        self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem('hebrew'))
+        self.table_widget.setItem(self.row, 7, QtWidgets.QTableWidgetItem('hebrew'))
 
         ###This section connects events from all the widgets to their
         ###respective functions.
@@ -35,7 +35,9 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.occasion_list.itemClicked.connect(self.occasion_select)
         #Since the two radio buttons are mutually exclusive, we only
         #need to connect it to one function.
-        self.hebrew_date_btn.toggled.connect(self.radio_button_toggle)
+        self.hebrew_date_btn.toggled.connect(self.hebrew_date_toggle)
+        self.secular_date_btn.toggled.connect(self.secular_date_toggle)
+        
         self.months_list.itemClicked.connect(self.months_select)
         self.day_spin_box.valueChanged.connect(self.day_spin_value)
 
@@ -75,25 +77,42 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         Enters it into column index 1 in the table widget.
         '''
         occasion = (item.text())
-        self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem(occasion))
+        self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem(occasion))
         
-    def radio_button_toggle(self):
+    def hebrew_date_toggle(self):
         '''
+        Enables/Disables relevant features.
         If either the Hebrew Date QRadioButton or the Secular Date QRadioButton is selected,
         the month, day and year fields get cleared out.
         In addition, the Calendar column in the table gets filled out to show which type of
         date entry it is. This will be useful for first converting all secular dates to hebrew
         dates.
         '''
+        self.secular_calendar.setEnabled(False)
+        self.months_list.setEnabled(True)
+        self.day_spin_box.setEnabled(True)
+        self.hebyear_groupbox.setEnabled(True)
+        self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem(''))
+        
         if self.hebrew_date_btn.isChecked() or self.secular_date_btn.isChecked():
             self.table_widget.setItem(self.row, 2, QtWidgets.QTableWidgetItem(''))
             self.table_widget.setItem(self.row, 3, QtWidgets.QTableWidgetItem(''))
             self.table_widget.setItem(self.row, 4, QtWidgets.QTableWidgetItem(''))
         if self.hebrew_date_btn.isChecked():
-            self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem('hebrew'))
+            self.table_widget.setItem(self.row, 7, QtWidgets.QTableWidgetItem('hebrew'))
         elif self.secular_date_btn.isChecked():
-            self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem('secular'))
+            self.table_widget.setItem(self.row, 7, QtWidgets.QTableWidgetItem('secular'))
 
+    def secular_date_toggle(self):
+        '''
+        Enables/Disables relevant features.
+        '''
+        self.secular_calendar.setEnabled(True)
+        self.months_list.setEnabled(False)
+        self.day_spin_box.setEnabled(False)
+        self.hebyear_groupbox.setEnabled(False)
+        self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem('N\A'))
+        
     def months_select(self, item):
         '''
         Enters the Hebrew month into the table but only of the Hebrew Date QRadioButton
@@ -132,6 +151,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.table_widget.setItem(self.row, 4, QtWidgets.QTableWidgetItem(''))
         self.heb_year_spin_box.setEnabled(False)
         self.sec_year_spin_box.setEnabled(True)
+        self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem('secular'))
+
 
     def heb_year_radio_toggle(self):
         '''
@@ -140,6 +161,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         '''
         self.sec_year_spin_box.setEnabled(False)
         self.heb_year_spin_box.setEnabled(True)
+        self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem('hebrew'))
 
     def heb_year_spin_value(self):
         '''
@@ -200,17 +222,17 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         #If "Next Row" is selected prior to the occasion is selected,
         #the Occasion value will be set to blank. Otherwise it's None by default
         #and none has no .text() function and the program crashes silently.
-        if self.table_widget.itemAt(self.row, 5) == None:
-            self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem(''))
+        if self.table_widget.itemAt(self.row, 6) == None:
+            self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem(''))
             return
-        self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem(current_occasion.text()))
+        self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem(current_occasion.text()))
 
         if self.hebrew_date_btn.isChecked():
             print('checked')
-            self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem('hebrew'))
+            self.table_widget.setItem(self.row, 7, QtWidgets.QTableWidgetItem('hebrew'))
         elif self.secular_date_btn.isChecked():
             print('secularcheck')
-            self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem('secular'))
+            self.table_widget.setItem(self.row, 7, QtWidgets.QTableWidgetItem('secular'))
 
     def row_select(self):
         '''

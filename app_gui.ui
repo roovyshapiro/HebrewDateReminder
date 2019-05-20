@@ -130,7 +130,7 @@
      <rect>
       <x>9</x>
       <y>405</y>
-      <width>751</width>
+      <width>811</width>
       <height>121</height>
      </rect>
     </property>
@@ -166,12 +166,17 @@
     </column>
     <column>
      <property name="text">
+      <string>Heb Year Type</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
       <string>Occasion</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Calendar</string>
+      <string>Calendar Type</string>
      </property>
     </column>
    </widget>
@@ -361,6 +366,9 @@
     </property>
    </widget>
    <widget class="QCalendarWidget" name="secular_calendar">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>450</x>
