@@ -217,7 +217,7 @@
      <rect>
       <x>740</x>
       <y>310</y>
-      <width>81</width>
+      <width>75</width>
       <height>21</height>
      </rect>
     </property>
@@ -567,7 +567,7 @@
      <bool>true</bool>
     </property>
     <property name="text">
-     <string>Current Row: 0</string>
+     <string>Current Row: 1</string>
     </property>
    </widget>
   </widget>

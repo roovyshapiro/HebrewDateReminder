@@ -208,7 +208,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.table_widget.setRowCount(row_amount + 1) 
         self.table_widget.setCurrentCell((self.row + 1),0)
         self.row += 1
-        self.current_row_label.setText(f"Current Row: {self.row}")
+        self.current_row_label.setText(f"Current Row: {self.row + 1}")
         #Resets values back to default.
         #These fill in the next row if possible since it counts as a value change.
         self.day_spin_box.setValue(1)
@@ -239,7 +239,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         selected cell's row.
         '''
         self.row = self.table_widget.currentRow()
-        self.current_row_label.setText(f"Current Row: {self.row}")
+        self.current_row_label.setText(f"Current Row: {self.row + 1}")
 
     def delete_table(self):
         '''
@@ -250,13 +250,17 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def clear_row(self):
         '''
-        Clears the currently selected row.
+        Deletes the selected row.
+        If only one row is left, it is cleared instead.
         '''
-        for x in range(8):
-            self.table_widget.setItem(self.row, x, QtWidgets.QTableWidgetItem(''))
-        self.table_widget.setCurrentCell(self.row,0)
-        self.first_name.clear()
-        self.last_name.clear()
+        if self.table_widget.rowCount() <= 1:
+            for x in range(8):
+                self.table_widget.setItem(self.row, x, QtWidgets.QTableWidgetItem(''))
+            self.table_widget.setCurrentCell(self.row,0)
+            self.first_name.clear()
+            self.last_name.clear()
+        else:
+            self.table_widget.removeRow(self.row)
 
     def exception_hook(self, exctype, value, traceback):
         '''
