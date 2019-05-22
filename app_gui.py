@@ -57,18 +57,18 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         
     def first_name_entry(self):
         '''
-        Gets the name entered into the first_name QPlainTextEdit box.
+        Gets the name entered into the first_name QLineEdit box.
         Enters it into column index 0 in the table widget.
         '''
-        first_name = self.first_name.toPlainText()
+        first_name = self.first_name.text()
         self.table_widget.setItem(self.row, 0, QtWidgets.QTableWidgetItem(first_name))
 
     def last_name_entry(self):
         '''
-        Gets the last entered into the first_name QPlainTextEdit box.
+        Gets the last entered into the first_name QLineEdit box.
         Enters it into column index 1 in the table widget.
         '''
-        last_name = self.last_name.toPlainText()
+        last_name = self.last_name.text()
         self.table_widget.setItem(self.row, 1, QtWidgets.QTableWidgetItem(last_name))
 
     def occasion_select(self, item):
@@ -213,8 +213,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         #These fill in the next row if possible since it counts as a value change.
         self.day_spin_box.setValue(1)
         self.heb_year_spin_box.setValue(5779)
-        self.first_name.setPlainText('')
-        self.last_name.setPlainText('')
+        self.first_name.text('')
+        self.last_name.text('')
         #Going to the next row fills out the Occassion field with whatever is still currently
         #selected. This makes it convenient to enter rows with the same occassions one after the other.
         #This also prevents a user from having to click away and then click back to choose the
