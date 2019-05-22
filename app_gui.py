@@ -208,6 +208,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.table_widget.setRowCount(row_amount + 1) 
         self.table_widget.setCurrentCell((self.row + 1),0)
         self.row += 1
+        self.current_row_label.setText(f"Current Row: {self.row}")
         #Resets values back to default.
         #These fill in the next row if possible since it counts as a value change.
         self.day_spin_box.setValue(1)
@@ -222,16 +223,14 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         #If "Next Row" is selected prior to the occasion is selected,
         #the Occasion value will be set to blank. Otherwise it's None by default
         #and none has no .text() function and the program crashes silently.
-        if self.table_widget.itemAt(self.row, 6) == None:
+        try:
+            self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem(current_occasion.text()))
+        except AttributeError:
             self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem(''))
-            return
-        self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem(current_occasion.text()))
 
         if self.hebrew_date_btn.isChecked():
-            print('checked')
             self.table_widget.setItem(self.row, 7, QtWidgets.QTableWidgetItem('hebrew'))
         elif self.secular_date_btn.isChecked():
-            print('secularcheck')
             self.table_widget.setItem(self.row, 7, QtWidgets.QTableWidgetItem('secular'))
 
     def row_select(self):
@@ -240,6 +239,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         selected cell's row.
         '''
         self.row = self.table_widget.currentRow()
+        self.current_row_label.setText(f"Current Row: {self.row}")
 
     def delete_table(self):
         '''
@@ -252,7 +252,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         '''
         Clears the currently selected row.
         '''
-        for x in range(7):
+        for x in range(8):
             self.table_widget.setItem(self.row, x, QtWidgets.QTableWidgetItem(''))
         self.table_widget.setCurrentCell(self.row,0)
         self.first_name.clear()
@@ -269,6 +269,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
           
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
+    app.setStyle('Fusion')
     window = MyApp()
     window.show()
     sys.exit(app.exec_())

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>833</width>
-    <height>607</height>
+    <width>840</width>
+    <height>667</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -100,10 +100,10 @@
    <widget class="QListWidget" name="occasion_list">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>70</y>
-      <width>244</width>
-      <height>123</height>
+      <x>530</x>
+      <y>110</y>
+      <width>250</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="sortingEnabled">
@@ -130,8 +130,8 @@
      <rect>
       <x>9</x>
       <y>405</y>
-      <width>811</width>
-      <height>121</height>
+      <width>821</width>
+      <height>191</height>
      </rect>
     </property>
     <row>
@@ -183,8 +183,8 @@
    <widget class="QPushButton" name="clear_table">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>534</y>
+      <x>10</x>
+      <y>600</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -268,28 +268,28 @@
    <widget class="QPlainTextEdit" name="first_name">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>70</y>
-      <width>310</width>
-      <height>123</height>
+      <x>10</x>
+      <y>110</y>
+      <width>250</width>
+      <height>61</height>
      </rect>
     </property>
    </widget>
    <widget class="QPlainTextEdit" name="last_name">
     <property name="geometry">
      <rect>
-      <x>325</x>
-      <y>70</y>
-      <width>249</width>
-      <height>123</height>
+      <x>270</x>
+      <y>110</y>
+      <width>250</width>
+      <height>61</height>
      </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>48</y>
+      <x>20</x>
+      <y>80</y>
       <width>72</width>
       <height>16</height>
      </rect>
@@ -308,8 +308,8 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>325</x>
-      <y>48</y>
+      <x>270</x>
+      <y>80</y>
       <width>72</width>
       <height>16</height>
      </rect>
@@ -348,8 +348,8 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>48</y>
+      <x>530</x>
+      <y>80</y>
       <width>62</width>
       <height>16</height>
      </rect>
@@ -371,7 +371,7 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>420</x>
       <y>240</y>
       <width>280</width>
       <height>155</height>
@@ -381,7 +381,7 @@
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>390</x>
       <y>200</y>
       <width>31</width>
       <height>191</height>
@@ -416,7 +416,7 @@
    <widget class="QRadioButton" name="secular_date_btn">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>420</x>
       <y>200</y>
       <width>84</width>
       <height>17</height>
@@ -554,13 +554,29 @@
      </property>
     </widget>
    </widget>
+   <widget class="QLabel" name="current_row_label">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>270</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>Current Row: 0</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>833</width>
+     <width>840</width>
      <height>21</height>
     </rect>
    </property>
