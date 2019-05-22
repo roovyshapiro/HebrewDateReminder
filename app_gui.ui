@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>840</width>
-    <height>667</height>
+    <width>846</width>
+    <height>670</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,8 +20,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>275</y>
+      <x>10</x>
+      <y>180</y>
       <width>111</width>
       <height>124</height>
      </rect>
@@ -101,7 +101,7 @@
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>130</y>
+      <y>70</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -130,7 +130,7 @@
      <rect>
       <x>9</x>
       <y>405</y>
-      <width>821</width>
+      <width>831</width>
       <height>191</height>
      </rect>
     </property>
@@ -183,7 +183,7 @@
    <widget class="QPushButton" name="clear_table">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>750</x>
       <y>600</y>
       <width>75</width>
       <height>23</height>
@@ -196,8 +196,8 @@
    <widget class="QSpinBox" name="day_spin_box">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>280</y>
+      <x>130</x>
+      <y>180</y>
       <width>33</width>
       <height>20</height>
      </rect>
@@ -215,8 +215,8 @@
    <widget class="QPushButton" name="next_row">
     <property name="geometry">
      <rect>
-      <x>740</x>
-      <y>310</y>
+      <x>10</x>
+      <y>370</y>
       <width>75</width>
       <height>21</height>
      </rect>
@@ -248,8 +248,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>250</y>
+      <x>130</x>
+      <y>160</y>
       <width>30</width>
       <height>16</height>
      </rect>
@@ -269,7 +269,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>100</y>
+      <y>50</y>
       <width>72</width>
       <height>16</height>
      </rect>
@@ -289,7 +289,7 @@
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>100</y>
+      <y>50</y>
       <width>72</width>
       <height>16</height>
      </rect>
@@ -309,7 +309,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>250</y>
+      <y>160</y>
       <width>46</width>
       <height>16</height>
      </rect>
@@ -329,7 +329,7 @@
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>100</y>
+      <y>50</y>
       <width>62</width>
       <height>16</height>
      </rect>
@@ -351,20 +351,20 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>240</y>
-      <width>280</width>
-      <height>155</height>
+      <x>400</x>
+      <y>160</y>
+      <width>281</width>
+      <height>161</height>
      </rect>
     </property>
    </widget>
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>200</y>
+      <x>370</x>
+      <y>140</y>
       <width>31</width>
-      <height>191</height>
+      <height>181</height>
      </rect>
     </property>
     <property name="frameShadow">
@@ -380,8 +380,8 @@
    <widget class="QRadioButton" name="hebrew_date_btn">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>199</y>
+      <x>10</x>
+      <y>140</y>
       <width>86</width>
       <height>17</height>
      </rect>
@@ -396,8 +396,8 @@
    <widget class="QRadioButton" name="secular_date_btn">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>200</y>
+      <x>400</x>
+      <y>140</y>
       <width>84</width>
       <height>17</height>
      </rect>
@@ -409,8 +409,8 @@
    <widget class="QPushButton" name="clear_row_btn">
     <property name="geometry">
      <rect>
-      <x>740</x>
-      <y>350</y>
+      <x>750</x>
+      <y>370</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -425,8 +425,8 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>260</y>
+      <x>170</x>
+      <y>160</y>
       <width>211</width>
       <height>121</height>
      </rect>
@@ -537,8 +537,8 @@
    <widget class="QLabel" name="current_row_label">
     <property name="geometry">
      <rect>
-      <x>740</x>
-      <y>270</y>
+      <x>10</x>
+      <y>330</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -554,7 +554,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>130</y>
+      <y>80</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -564,6 +564,9 @@
     </property>
     <property name="maxLength">
      <number>50</number>
+    </property>
+    <property name="frame">
+     <bool>true</bool>
     </property>
     <property name="clearButtonEnabled">
      <bool>false</bool>
@@ -573,7 +576,7 @@
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>130</y>
+      <y>80</y>
       <width>113</width>
       <height>20</height>
      </rect>
@@ -588,13 +591,114 @@
      <bool>false</bool>
     </property>
    </widget>
+   <widget class="QPushButton" name="import_csv_btn">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>600</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Import CSV</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="convert_all_hebrew_btn">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>600</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Convert All to Hebrew</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="export_csv_btn">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>600</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Export to CSV</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="export_ics_btn">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>600</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Export to ICS</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="convert_all_secular_btn">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>600</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Convert All to Secular</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="convert_row_hebrew_btn">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>340</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Convert Row to Hebrew</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="convert_row_secular_btn">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>370</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Convert Row to Secular</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="converted_date_text">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>340</y>
+      <width>201</width>
+      <height>51</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>840</width>
+     <width>846</width>
      <height>21</height>
     </rect>
    </property>

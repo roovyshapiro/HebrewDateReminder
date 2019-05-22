@@ -53,6 +53,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.clear_row_btn.clicked.connect(self.clear_row)
         self.table_widget.cellClicked.connect(self.row_select)
 
+        self.export_csv_btn.clicked.connect(self.export_to_csv)
+
     def first_name_entry(self):
         '''
         Gets the name entered into the first_name QLineEdit box.
@@ -259,6 +261,18 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.last_name.clear()
         else:
             self.table_widget.removeRow(self.row)
+
+    def export_to_csv(self):
+        '''
+        Exports data from the table to a csv file.
+        Currently - each row number is a dictionary key
+        with each full row's list of items as its value.
+        '''
+        row_list = [x for x in range(self.table_widget.rowCount())]
+        table_dict = {i: [] for i in row_list}
+        for row in range(self.table_widget.rowCount()):
+            for column in range(self.table_widget.columnCount()):
+                table_dict[row].append(self.table_widget.item(row, column).text())
 
     def exception_hook(self, exctype, value, traceback):
         '''
