@@ -1,7 +1,7 @@
 #https://doc.qt.io/qtforpython/PySide2/QtWidgets/QTableWidget.html#
 #https://www.pythonforengineers.com/your-first-gui-app-with-python-and-pyqt/
 
-import sys
+import sys, csv
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 #This .ui file is created by QTDesigner and then imported here.
@@ -265,14 +265,34 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def export_to_csv(self):
         '''
         Exports data from the table to a csv file.
-        Currently - each row number is a dictionary key
+        Each row number is a dictionary key
         with each full row's list of items as its value.
         '''
         row_list = [x for x in range(self.table_widget.rowCount())]
         table_dict = {i: [] for i in row_list}
         for row in range(self.table_widget.rowCount()):
             for column in range(self.table_widget.columnCount()):
-                table_dict[row].append(self.table_widget.item(row, column).text())
+                #A try/except was used here temporarily because the data hasn't been
+                #validated yet. Once validation is implemented, there won't be any
+                #cells filled with "None."
+                try:
+                    table_dict[row].append(self.table_widget.item(row, column).text())
+                except AttributeError:
+                    print('none')
+        #QFileDialog creates a pop up window asking the user to select a destination
+        #and choose the filename to export the csv. Only a csv is allowed.
+        #Each list from the table_dict is written to the csv file.
+        filename = QtWidgets.QFileDialog.getSaveFileName(None, 'Save File As',"", "csv(*.csv)")
+        with open(filename[0], 'w', newline = '') as f:
+            csv_writer = csv.writer(f)
+            for key in table_dict:
+                csv_writer.writerow(table_dict[key])
+        #Pop up window showing the export was successful.
+        msg = QtWidgets.QMessageBox()
+        msg.setText("CSV Successfully Exported.")
+        msg.setWindowTitle("Success!")
+        msg.setIcon(QtWidgets.QMessageBox.Information)
+        msg.exec_()
 
     def exception_hook(self, exctype, value, traceback):
         '''
