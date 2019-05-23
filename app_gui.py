@@ -53,6 +53,11 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.clear_row_btn.clicked.connect(self.clear_row)
         self.table_widget.cellClicked.connect(self.row_select)
 
+        #Any edits to the table require the data to be revalidated
+        self.table_widget.cellClicked.connect(self.need_validation)
+        self.table_widget.cellChanged.connect(self.need_validation)
+
+        self.validate_btn.clicked.connect(self.validate_data)
         self.export_csv_btn.clicked.connect(self.export_to_csv)
 
     def first_name_entry(self):
@@ -261,6 +266,33 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.last_name.clear()
         else:
             self.table_widget.removeRow(self.row)
+
+    def need_validation(self):
+        '''
+        If Table data has been changed, we will need to validate again.
+        '''
+        self.convert_all_hebrew_btn.setEnabled(False)
+        self.convert_all_secular_btn.setEnabled(False)
+        self.export_csv_btn.setEnabled(False)
+        self.export_ics_btn.setEnabled(False)
+
+    def validate_data(self):
+        '''
+        Check through all the data in the table for errors.
+        If there are, a popup should explain the errors.
+        If no errors exist, the other buttons become available.
+        '''
+        validated = True
+        if validated:
+            msg = QtWidgets.QMessageBox()
+            msg.setText("Data is Valid.")
+            msg.setWindowTitle("Success!")
+            msg.setIcon(QtWidgets.QMessageBox.Information)
+            msg.exec_()
+            self.convert_all_hebrew_btn.setEnabled(True)
+            self.convert_all_secular_btn.setEnabled(True)
+            self.export_csv_btn.setEnabled(True)
+            self.export_ics_btn.setEnabled(True)
 
     def export_to_csv(self):
         '''

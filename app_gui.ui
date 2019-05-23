@@ -183,8 +183,8 @@
    <widget class="QPushButton" name="clear_table">
     <property name="geometry">
      <rect>
-      <x>750</x>
-      <y>600</y>
+      <x>760</x>
+      <y>370</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -409,7 +409,7 @@
    <widget class="QPushButton" name="clear_row_btn">
     <property name="geometry">
      <rect>
-      <x>750</x>
+      <x>670</x>
       <y>370</y>
       <width>75</width>
       <height>23</height>
@@ -605,9 +605,12 @@
     </property>
    </widget>
    <widget class="QPushButton" name="convert_all_hebrew_btn">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>300</x>
       <y>600</y>
       <width>131</width>
       <height>23</height>
@@ -618,9 +621,12 @@
     </property>
    </widget>
    <widget class="QPushButton" name="export_csv_btn">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>660</x>
       <y>600</y>
       <width>75</width>
       <height>23</height>
@@ -631,9 +637,12 @@
     </property>
    </widget>
    <widget class="QPushButton" name="export_ics_btn">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>750</x>
       <y>600</y>
       <width>75</width>
       <height>23</height>
@@ -644,9 +653,12 @@
     </property>
    </widget>
    <widget class="QPushButton" name="convert_all_secular_btn">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>440</x>
       <y>600</y>
       <width>131</width>
       <height>23</height>
@@ -690,6 +702,19 @@
       <width>201</width>
       <height>51</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="validate_btn">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>600</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Validate</string>
     </property>
    </widget>
   </widget>
