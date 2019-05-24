@@ -291,6 +291,25 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         If no errors exist, the other buttons become available.
         '''
         validated = True
+        #Build out a dictionary of all the items in the table.
+        #If it encounters a none type (cell is empty), validated
+        #is false and the dictionary breaks.
+        row_list = [x for x in range(self.table_widget.rowCount())]
+        table_dict = {i: [] for i in row_list}
+        for row in range(self.table_widget.rowCount()):
+            for column in range(self.table_widget.columnCount()):
+                try:
+                    table_dict[row].append(self.table_widget.item(row, column).text())
+                except AttributeError:
+                    validated = False
+                    break
+        #Basic validation so that no cell is empty or whitespace.
+        #TODO: create validation checks for each cell type.
+        for key, value in table_dict.items():
+            for item in value:
+                if item == '' or (type(item) != int and set(item) == {' '}):
+                    validated = False
+
         if validated:
             msg = QtWidgets.QMessageBox()
             msg.setText("Data is Valid.")
@@ -301,6 +320,13 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.convert_all_secular_btn.setEnabled(True)
             self.export_csv_btn.setEnabled(True)
             self.export_ics_btn.setEnabled(True)
+        else:
+            msg = QtWidgets.QMessageBox()
+            msg.setText("Data is not Valid.")
+            msg.setWindowTitle("Error!")
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.setDetailedText('Detailed Error Text Here')
+            msg.exec_()
 
     def export_to_csv(self):
         '''
