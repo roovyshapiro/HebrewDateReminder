@@ -315,10 +315,15 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         #and choose the filename to export the csv. Only a csv is allowed.
         #Each list from the table_dict is written to the csv file.
         filename = QtWidgets.QFileDialog.getSaveFileName(None, 'Save File As',"", "csv(*.csv)")
-        with open(filename[0], 'w', newline = '') as f:
-            csv_writer = csv.writer(f)
-            for key in table_dict:
-                csv_writer.writerow(table_dict[key])
+        #If no file is chosen, the program crashes. The try/except prevents that.
+        try:
+            with open(filename[0], 'w', newline = '') as f:
+                csv_writer = csv.writer(f)
+                for key in table_dict:
+                    csv_writer.writerow(table_dict[key])
+        except FileNotFoundError:
+            #Exit this function without displaying a success pop up message.
+            return
         #Pop up window showing the export was successful.
         msg = QtWidgets.QMessageBox()
         msg.setText("CSV Successfully Exported.")
