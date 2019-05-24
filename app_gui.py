@@ -26,7 +26,9 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.table_widget.setCurrentCell(0,0)
         #Whichever current row is selected
         self.row = self.table_widget.currentRow()
+        #Populate some cells by default
         self.table_widget.setItem(self.row, 7, QtWidgets.QTableWidgetItem('hebrew'))
+        self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem('hebrew'))
 
         ###This section connects events from all the widgets to their
         ###respective functions.
@@ -103,10 +105,16 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.table_widget.setItem(self.row, 2, QtWidgets.QTableWidgetItem(''))
             self.table_widget.setItem(self.row, 3, QtWidgets.QTableWidgetItem(''))
             self.table_widget.setItem(self.row, 4, QtWidgets.QTableWidgetItem(''))
+    
         if self.hebrew_date_btn.isChecked():
             self.table_widget.setItem(self.row, 7, QtWidgets.QTableWidgetItem('hebrew'))
         elif self.secular_date_btn.isChecked():
             self.table_widget.setItem(self.row, 7, QtWidgets.QTableWidgetItem('secular'))
+
+        if self.heb_year_radio.isChecked():
+            self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem('hebrew'))
+        if self.sec_year_radio.isChecked():
+            self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem('secular'))
 
     def secular_date_toggle(self):
         '''
