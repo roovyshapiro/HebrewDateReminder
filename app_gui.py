@@ -211,14 +211,33 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         '''
         When clicking on a cell on the table, it changes the current row to the currently
         selected cell's row.
-        Additionally sets the sunet radio toggle to match the text in the selected row.
+        Additionally sets the widgets to match what's currently selected in that row.
         '''
         self.row = self.table_widget.currentRow()
         self.current_row_label.setText(f"Current Row: {self.row + 1}")
+        #set before/after sunset radio button to match data in table
         if self.table_widget.item(self.row, 5).text() == "Before Sunset":
             self.before_sunset_radio.setChecked(True)
         else:
             self.after_sunset_radio.setChecked(True)
+        #set first/last name to match data in table
+        #try/except if row is selected before first row is filled out
+        try:
+            self.first_name.setText(self.table_widget.item(self.row, 0).text())
+            self.last_name.setText(self.table_widget.item(self.row, 1).text())
+        except AttributeError:
+            pass
+        #set calendar selection to match date in table
+        #try/except if row is selected before first row is filled out
+        try:
+            month = int(self.table_widget.item(self.row, 2).text())
+            day = int(self.table_widget.item(self.row, 3).text())
+            year = int(self.table_widget.item(self.row, 4).text())
+            self.secular_calendar.setSelectedDate(QtCore.QDate(year, month, day))
+        except AttributeError:
+            pass
+        #TODO set the currently selected occasion to match what's in the table.
+        #Having trouble using text from table to set the QListWidget's current row.
 
     def delete_table(self):
         '''
