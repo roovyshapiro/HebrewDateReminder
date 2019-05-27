@@ -170,9 +170,25 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def row_change(self):
         '''
         Next Row Button.
+        First checks to make sure that the first and last name fields aren't blank.
         Increases the count of rows by 1 and selects the first cell in the newly created row.
         Also enters the currently selected occasion into the occasion field.
         '''
+        message = False
+        if ' ' in self.first_name.text() or ' ' in self.last_name.text():
+            text = "No spaces allowed in first or last name."
+            message = True
+        if self.first_name.text() == '' or self.last_name.text() == '':
+            text = "First or last name cannot be empty."
+            message = True
+        if message:
+            msg = QtWidgets.QMessageBox()
+            msg.setText(text)
+            msg.setWindowTitle("Error!")
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.exec_()
+            return
+
         row_amount = self.table_widget.rowCount()
         if self.row + 1 == row_amount:
             self.table_widget.setRowCount(row_amount + 1) 
