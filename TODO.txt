@@ -1,0 +1,35 @@
+TODO
+
+TASKS:
+
+BUGS:
+
+-The user can't advance to the next row by using the Next Row button if some of the fields
+are blank. See "def row_change(self):". 
+However, if a user clicks on a row and deletes one of the fields,
+They can then click back to a later row and continue since the Next Row button has already been pressed a few times
+to generate those rows. To resolve this, there needs to be a mechanism to validate all the rows and not just the current one.
+Either that or prevent the user from clicking elsewhere if the current row is empty.
+
+FEATURES:
+
+NOTES:
+
+#Build out a dictionary of all the items in the table.
+#If it encounters a none type (cell is empty), validated
+#is false and the dictionary breaks.
+row_list = [x for x in range(self.table_widget.rowCount())]
+table_dict = {i: [] for i in row_list}
+for row in range(self.table_widget.rowCount()):
+	for column in range(self.table_widget.columnCount()):
+		try:
+			table_dict[row].append(self.table_widget.item(row, column).text())
+		except AttributeError:
+			validated = False
+			break
+#Basic validation so that no cell is empty or whitespace.
+#TODO: create validation checks for each cell type.
+for key, value in table_dict.items():
+	for item in value:
+		if item == '' or (type(item) != int and set(item) == {' '}):
+			validated = False
