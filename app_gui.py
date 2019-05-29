@@ -2,7 +2,8 @@
 #https://www.pythonforengineers.com/your-first-gui-app-with-python-and-pyqt/
 #Web Based Implementation of this: https://www.hebcal.com/yahrzeit/
 
-import sys, csv
+import sys, csv, socket, requests, json, time, calendar
+from collections import OrderedDict
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 #This .ui file is created by QTDesigner and then imported here.
@@ -11,7 +12,7 @@ qtCreatorFile = "app_gui.ui"
  
 Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
  
-class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
+class hebcal_converter(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
         Ui_MainWindow.__init__(self)
@@ -159,17 +160,31 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.heb_year_spin_box.setValue(heb_year)
         self.hebrew_sec_label.setText(f"In the year {heb_year}, \nNisan 1 was in {year}.")
 
-
     def convert_heb_to_secular(self):
         '''
-        (Currently prints the selected items to the converted_date_text text box)
-        This converts the selected hebrew date to secular using hebcal's API and then populates
-        the date fields in the table. Also fills in converted_date_text.
+        If internet connection is detected, convert the hebrew date to its secular equivalent using
+        hebcal's API. This fills out the text box.
         '''
-        month = self.months_list.currentItem().text()
-        day = str(self.day_spin_box.value())
-        year = str(self.heb_year_spin_box.value())
-        self.converted_date_text.setPlainText(f"{month} {day}, {year}")
+        if self.check_internet_connection:
+            heb_month = self.months_list.currentItem().text()
+            heb_day = str(self.day_spin_box.value())
+            heb_year = str(self.heb_year_spin_box.value())
+
+            year, month, day = self.heb_to_greg(heb_year, heb_month, heb_day)
+            self.converted_date_text.setPlainText(f"{heb_month} {heb_day}, {heb_year} is the same as\n"
+                                                  f"{calendar.month_name[month]} {day}, {year}.")
+            self.table_widget.setItem(self.row, 2, QtWidgets.QTableWidgetItem(month)) 
+            self.table_widget.setItem(self.row, 3, QtWidgets.QTableWidgetItem(day))
+            self.table_widget.setItem(self.row, 4, QtWidgets.QTableWidgetItem(year))
+            self.secular_calendar.setSelectedDate(QtCore.QDate(year, month, day))
+            self.secular_date_btn.setChecked(True)
+        
+        else:
+            msg = QtWidgets.QMessageBox()
+            msg.setText("No Internet Connection.")
+            msg.setWindowTitle("Error!")
+            msg.setIcon(QtWidgets.QMessageBox.Critical)
+            msg.exec_()
 
     def row_change(self):
         '''
@@ -322,12 +337,52 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         '''
         print(exctype, value, traceback)
         sys._excepthook(exctype, value, traceback) 
-        sys.exit(1) 
-    
+        sys.exit(1)
+
+    def check_internet_connection(self):
+        '''
+        API calls to hebcal rely on an active internet connection.
+        This function checks if a connection can be established or not.
+        '''
+        try:
+            socket.create_connection(("www.hebcal.com", 80))
+            return True
+        except OSError:
+            pass
+        return False
+
+    def heb_to_greg(self, year, month, day):
+        '''
+        Utilizes HebCal's API to convert hebrew dates to gregorian dates
+        To convert from Hebrew to Gregorian use this URL format:
+
+        https://www.hebcal.com/converter/?cfg=json&hy=5753&hm=Tamuz&hd=25&h2g=1
+
+        cfg=json – output format is JSON (cfg=json) or XML (cfg=xml)
+        hy=5753 – Hebrew year
+        hm=Tamuz – Hebrew month (Nisan, Iyyar, Sivan, Tamuz, Av, Elul,
+                                 Tishrei, Cheshvan, Kislev, Tevet, Shvat, Adar1, Adar2)
+        hd=25 – Hebrew day of month
+        h2g=1 – Convert from Hebrew to Gregorian date
+
+        Sample JSON response:
+        {'gy': 1993, 'gm': 7, 'gd': 14,
+        'hy': 5753, 'hm': 'Tamuz', 'hd': 25,
+        'hebrew': 'כ״ה בְּתַמּוּז תשנ״ג', 'events': ['Parashat Matot-Masei']}
+        >>>print("Status code:", r.status_code)
+        '''
+        url = f"https://www.hebcal.com/converter/?cfg=json&hy={year}&hm={month}&hd={day}&h2g=1"
+        r = requests.get(url)
+        data = r.json()
+        secular_year = data['gy']
+        secular_month = data['gm']
+        secular_day = data['gd']
+        return secular_year, secular_month, secular_day
+
           
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle('Fusion')
-    window = MyApp()
+    window = hebcal_converter()
     window.show()
     sys.exit(app.exec_())
