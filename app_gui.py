@@ -146,6 +146,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         year = str(self.heb_year_spin_box.value())
         sec_year = int(year[1:]) + 1240
         self.sec_year_spin_box.setValue(sec_year)
+        self.hebrew_sec_label.setText(f"In the year {year}, \nNisan 1 was in {sec_year}.")
 
     def sec_year_spin_value(self):
         '''
@@ -156,6 +157,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         year = self.sec_year_spin_box.value()
         heb_year = (year - 1240) + 5000
         self.heb_year_spin_box.setValue(heb_year)
+        self.hebrew_sec_label.setText(f"In the year {heb_year}, \nNisan 1 was in {year}.")
+
 
     def convert_heb_to_secular(self):
         '''
