@@ -270,6 +270,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.last_name.clear()
         else:
             self.table_widget.removeRow(self.row)
+            self.row -= 1
+            self.row_select()
 
     def convert_all_to_hebrew(self):
         pass
