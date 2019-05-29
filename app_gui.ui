@@ -694,6 +694,29 @@ Nisan 1 was in 2019.</string>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>first_name</tabstop>
+  <tabstop>last_name</tabstop>
+  <tabstop>occasion_list</tabstop>
+  <tabstop>secular_date_btn</tabstop>
+  <tabstop>before_sunset_radio</tabstop>
+  <tabstop>after_sunset_radio</tabstop>
+  <tabstop>secular_calendar</tabstop>
+  <tabstop>next_row</tabstop>
+  <tabstop>hebrew_date_btn</tabstop>
+  <tabstop>months_list</tabstop>
+  <tabstop>day_spin_box</tabstop>
+  <tabstop>heb_year_spin_box</tabstop>
+  <tabstop>sec_year_spin_box</tabstop>
+  <tabstop>convert_date_secular_btn</tabstop>
+  <tabstop>clear_row_btn</tabstop>
+  <tabstop>clear_table</tabstop>
+  <tabstop>convert_all_hebrew_btn</tabstop>
+  <tabstop>export_csv_btn</tabstop>
+  <tabstop>export_ics_btn</tabstop>
+  <tabstop>table_widget</tabstop>
+  <tabstop>converted_date_text</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
