@@ -353,7 +353,6 @@ class hebcal_converter(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def heb_to_greg(self, year, month, day):
         '''
-        Utilizes HebCal's API to convert hebrew dates to gregorian dates
         To convert from Hebrew to Gregorian use this URL format:
 
         https://www.hebcal.com/converter/?cfg=json&hy=5753&hm=Tamuz&hd=25&h2g=1
@@ -379,7 +378,34 @@ class hebcal_converter(QtWidgets.QMainWindow, Ui_MainWindow):
         secular_day = data['gd']
         return secular_year, secular_month, secular_day
 
-          
+    def greg_to_heb(self, year, month, day):
+        '''
+        To convert from Gregorian to Hebrew date use this URL format:
+
+        https://www.hebcal.com/converter/?cfg=json&gy=2011&gm=6&gd=2&g2h=1
+
+        gy=2011 – Gregorian year
+        gm=6 – Gregorian month (1=January, 12=December)
+        gd=2 – Gregorian day of month
+        g2h=1 – Convert from Gregorian to Hebrew date
+        gs=on – After sunset on Gregorian date
+        cfg=json – output format is JSON (cfg=json) or XML (cfg=xml)
+
+        Sample JSON Response:
+        {'gy': 2011, 'gm': 6, 'gd': 2,
+         'hy': 5771, 'hm': 'Iyyar','hd': 29,
+         'hebrew': 'כ״ו בְּאָב תשנ״ו', 'events': ['Parashat Shoftim']}
+        '''
+
+        url = f"https://www.hebcal.com/converter/?cfg=json&gy={year}&gm={month}&gd={day}&g2h=1"
+        r = requests.get(url)
+        data = r.json()
+        heb_year = data['hy']
+        heb_month = data['hm']
+        heb_day = data['hd']
+        return heb_year, heb_month, heb_day
+
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle('Fusion')
