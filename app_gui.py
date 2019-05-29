@@ -309,13 +309,8 @@ class hebcal_converter(QtWidgets.QMainWindow, Ui_MainWindow):
         table_dict = {i: [] for i in row_list}
         for row in range(self.table_widget.rowCount()):
             for column in range(self.table_widget.columnCount()):
-                #A try/except was used here temporarily because the data hasn't been
-                #validated yet. Once validation is implemented, there won't be any
-                #cells filled with "None."
-                try:
-                    table_dict[row].append(self.table_widget.item(row, column).text())
-                except AttributeError:
-                    print('none')
+                table_dict[row].append(self.table_widget.item(row, column).text())
+
         #QFileDialog creates a pop up window asking the user to select a destination
         #and choose the filename to export the csv. Only a csv is allowed.
         #Each list from the table_dict is written to the csv file.
