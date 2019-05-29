@@ -196,19 +196,19 @@ class hebcal_converter(QtWidgets.QMainWindow, Ui_MainWindow):
         Also enters the currently selected occasion into the occasion field.
         '''
         message = False
-        if self.table_widget.item(self.row, 0) == None:
+        if self.table_widget.item(self.row, 0) == None or self.table_widget.item(self.row, 0).text() == '':
             text = "First Name cannot be empty."
             message = True
         elif ' ' in self.table_widget.item(self.row, 0).text():
             text = "No spaces allowed in First Name."
             message = True
-        elif self.table_widget.item(self.row, 1) == None:
+        elif self.table_widget.item(self.row, 1) == None or self.table_widget.item(self.row, 1).text() == '':
             text = "Last Name cannot be empty."
             message = True
         elif ' ' in self.table_widget.item(self.row, 1).text():
             text = "No spaces allowed in Last Name."
             message = True
-        elif self.table_widget.item(self.row, 2) == None:
+        elif self.table_widget.item(self.row, 2) == None or self.table_widget.item(self.row, 2).text() == '':
             text = "Date cannot be empty."
             message = True
 
