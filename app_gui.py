@@ -54,6 +54,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.table_widget.cellClicked.connect(self.row_select)
 
+        self.convert_all_hebrew_btn.clicked.connect(self.convert_all_to_hebrew)
         self.export_csv_btn.clicked.connect(self.export_to_csv)
 
     def first_name_entry(self):
@@ -170,17 +171,27 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def row_change(self):
         '''
         Next Row Button.
-        First checks to make sure that the first and last name fields aren't blank.
+        First checks to make sure that the first name, last name and date fields aren't empty.
         Increases the count of rows by 1 and selects the first cell in the newly created row.
         Also enters the currently selected occasion into the occasion field.
         '''
         message = False
-        if ' ' in self.first_name.text() or ' ' in self.last_name.text():
-            text = "No spaces allowed in first or last name."
+        if self.table_widget.item(self.row, 0) == None:
+            text = "First Name cannot be empty."
             message = True
-        if self.first_name.text() == '' or self.last_name.text() == '':
-            text = "First or last name cannot be empty."
+        elif ' ' in self.table_widget.item(self.row, 0).text():
+            text = "No spaces allowed in First Name."
             message = True
+        elif self.table_widget.item(self.row, 1) == None:
+            text = "Last Name cannot be empty."
+            message = True
+        elif ' ' in self.table_widget.item(self.row, 1).text():
+            text = "No spaces allowed in Last Name."
+            message = True
+        elif self.table_widget.item(self.row, 2) == None:
+            text = "Date cannot be empty."
+            message = True
+
         if message:
             msg = QtWidgets.QMessageBox()
             msg.setText(text)
@@ -259,6 +270,9 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.last_name.clear()
         else:
             self.table_widget.removeRow(self.row)
+
+    def convert_all_to_hebrew(self):
+        pass
 
     def export_to_csv(self):
         '''
