@@ -31,6 +31,8 @@ class hebcal_converter(QtWidgets.QMainWindow, Ui_MainWindow):
         #Populate some cells in the table with default text
         self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem("Before Sunset"))
         self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem("Birthday"))
+        self.occasion_list.setCurrentRow(0)
+        self.first_name.setFocus()
 
         ###This section connects events from all the widgets to their
         ###respective functions.
@@ -265,8 +267,11 @@ class hebcal_converter(QtWidgets.QMainWindow, Ui_MainWindow):
             self.secular_calendar.setSelectedDate(QtCore.QDate(year, month, day))
         except AttributeError:
             pass
-        #TODO set the currently selected occasion to match what's in the table.
-        #Having trouble using text from table to set the QListWidget's current row.
+        #Set the currently selected occasion to match what's in the table.
+        current_occasion = self.table_widget.item(self.row, 6).text()
+        for index in range(self.occasion_list.count()):
+            if self.occasion_list.item(index).text() == current_occasion:
+                self.occasion_list.setCurrentItem(self.occasion_list.item(index))
 
     def delete_table(self):
         '''
