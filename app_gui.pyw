@@ -2,9 +2,10 @@
 #https://www.pythonforengineers.com/your-first-gui-app-with-python-and-pyqt/
 #Web Based Implementation of this: https://www.hebcal.com/yahrzeit/
 
-import sys, csv, socket, requests, json, time, calendar, pprint
+import sys, csv, requests, json, time, calendar, pprint
 from collections import OrderedDict
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
+from urllib.request import urlopen
 
 #This .ui file is created by QTDesigner and then imported here.
 #Add new widgets via QTDesigner, save the ui file and then simply reference them here.
@@ -167,7 +168,7 @@ class hebcal_converter(QtWidgets.QMainWindow, Ui_MainWindow):
         If internet connection is detected, convert the hebrew date to its secular equivalent using
         hebcal's API. This fills out the text box.
         '''
-        if self.check_internet_connection:
+        if self.check_internet_connection():
             heb_month = self.months_list.currentItem().text()
             heb_day = str(self.day_spin_box.value())
             heb_year = str(self.heb_year_spin_box.value())
@@ -180,13 +181,6 @@ class hebcal_converter(QtWidgets.QMainWindow, Ui_MainWindow):
             self.table_widget.setItem(self.row, 4, QtWidgets.QTableWidgetItem(year))
             self.secular_calendar.setSelectedDate(QtCore.QDate(year, month, day))
             self.secular_date_btn.setChecked(True)
-        
-        else:
-            msg = QtWidgets.QMessageBox()
-            msg.setText("No Internet Connection.")
-            msg.setWindowTitle("Error!")
-            msg.setIcon(QtWidgets.QMessageBox.Critical)
-            msg.exec_()
 
     def row_change(self):
         '''
@@ -237,6 +231,7 @@ class hebcal_converter(QtWidgets.QMainWindow, Ui_MainWindow):
         self.table_widget.setItem(self.row, 6, QtWidgets.QTableWidgetItem(current_occasion.text()))
         self.before_sunset_radio.setChecked(True)
         self.table_widget.setItem(self.row, 5, QtWidgets.QTableWidgetItem("Before Sunset"))
+        self.first_name.setFocus()
 
     def row_select(self):
         '''
@@ -375,10 +370,15 @@ class hebcal_converter(QtWidgets.QMainWindow, Ui_MainWindow):
         This function checks if a connection can be established or not.
         '''
         try:
-            socket.create_connection(("www.hebcal.com", 80))
+            urlopen("https://www.hebcal.com", timeout=1)
             return True
-        except OSError:
+        except:
             pass
+        msg = QtWidgets.QMessageBox()
+        msg.setText("No Internet Connection.")
+        msg.setWindowTitle("Error!")
+        msg.setIcon(QtWidgets.QMessageBox.Critical)
+        msg.exec_()
         return False
 
     def heb_to_greg(self, year, month, day):
