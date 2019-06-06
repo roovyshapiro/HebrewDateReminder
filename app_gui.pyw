@@ -2,7 +2,7 @@
 #https://www.pythonforengineers.com/your-first-gui-app-with-python-and-pyqt/
 #Web Based Implementation of this: https://www.hebcal.com/yahrzeit/
 
-import sys, csv, socket, requests, json, time, calendar
+import sys, csv, socket, requests, json, time, calendar, pprint
 from collections import OrderedDict
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
@@ -297,7 +297,37 @@ class hebcal_converter(QtWidgets.QMainWindow, Ui_MainWindow):
             self.row_select()
 
     def convert_all_to_hebrew(self):
-        pass
+        '''
+        Loads the entire table into a dictionary.
+        Loops through each row converting the date into a hebrew date.
+        Generates another dictionary with the hebrew dates.
+        '''
+        row_list = [x for x in range(self.table_widget.rowCount())]
+        #Load entire table into dictionary
+        table_dict = {i: [] for i in row_list}
+        for row in range(len(row_list)):
+            for column in range(self.table_widget.columnCount()):
+                try:
+                    table_dict[row].append(self.table_widget.item(row, column).text())
+                except AttributeError:
+                    pass
+        heb_table_dict = {i: [] for i in row_list}
+        if self.check_internet_connection():
+            for row in table_dict:
+                #Convert dates to hebrew
+                heb_year, heb_month, heb_day = self.greg_to_heb(table_dict[row][4], table_dict[row][2], table_dict[row][3],)
+                #Generate new hebrew dictionary
+                heb_table_dict[row] = ([table_dict[row][0],
+                                        table_dict[row][1],
+                                        heb_month,
+                                        heb_day,
+                                        heb_year,
+                                        table_dict[row][5],
+                                        table_dict[row][6],])
+        #Prints both tables for now
+        pprint.pprint(table_dict)
+        print()
+        pprint.pprint(heb_table_dict)
 
     def export_to_csv(self):
         '''
